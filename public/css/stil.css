@@ -1,0 +1,24 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+.container-fluid{
+	padding:0;
+}
+
+#map {	
+	min-height: 450px;
+	min-width: 450px;
+}
+
+#output {
+	font-size: 11px;
+}
+
+#udaljenost{
+	display:none;
+}
+.padding{
+	padding-bottom:50px;
+}
