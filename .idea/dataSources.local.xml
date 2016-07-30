@@ -14,5 +14,11 @@
         <private-key-path>$USER_HOME$/.ssh/id_rsa</private-key-path>
       </ssh-properties>
     </data-source>
+    <data-source name="MySQL - @us-cdbr-iron-east-04.cleardb.net" uuid="a4fcfb80-f12f-4c92-a7ac-a61499ac04f9">
+      <secret-storage>memory</secret-storage>
+      <user-name>bcb627776a19ab</user-name>
+      <schema-pattern>heroku_17ae570ad5f74e0.*</schema-pattern>
+      <default-schemas>information_schema.*</default-schemas>
+    </data-source>
   </component>
 </project>
