@@ -240,34 +240,37 @@
                     zIndex: beach[3]
                 });
             }
-        // Brisanje markera.
-        function deleteMarkers() {
-            marker.setMap(null);
-            marker = null;
-        }
-        /*Dohvaca cijene sa servera*/
-        function getPrice(){
-            distance=distance/1000;
-            distance=distance.toFixed(2);
-            $.ajax({
-                type: 'GET',
-                url: "{{ url('order/getPrice') }}/"+distance,
-                success: function (data) {
-                    var cijene=data;
-                    document.getElementById("cjene").innerHTML="<p><b>Cijena</b></p>";
-                    for(i=0;i<cijene.length;i++){
-                        document.getElementById("cjene").innerHTML += "<p>"+cijene[i].name+" "+cijene[i].price+" kn</p>";
+            // Brisanje markera.
+            function deleteMarkers() {
+                marker.setMap(null);
+                marker = null;
+            }
+
+            /*Dohvaca cijene sa servera*/
+            function getPrice() {
+                distance = distance / 1000;
+                distance = distance.toFixed(2);
+                $.ajax({
+                    type: 'GET',
+                    url: "{{ url('order/getPrice') }}/" + distance,
+                    success: function (data) {
+                        var cijene = data;
+                        document.getElementById("cjene").innerHTML = "<p><b>Cijena</b></p>";
+                        for (i = 0; i < cijene.length; i++) {
+                            document.getElementById("cjene").innerHTML += "<p>" + cijene[i].name + " " + cijene[i].price + " kn</p>";
+                        }
+                        $('#cijene').show();
+                        $('.saznaj-cijenu').hide();
                     }
-                    $('#cijene').show();
-                    $('.saznaj-cijenu').hide();
-                }
-            });
-        }
-        function getAlert(){
-            var distanceLeng=$("#output").text().length-3;
-            var distance=$("#output").text();
-            var dist=distance.substring(0,distanceLeng);
-            document.cookie="distance="+dist;
+                });
+            }
+
+            function getAlert() {
+                var distanceLeng = $("#output").text().length - 3;
+                var distance = $("#output").text();
+                var dist = distance.substring(0, distanceLeng);
+                document.cookie = "distance=" + dist;
+            }
         }
     </script>
 @endsection
