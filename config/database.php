@@ -61,7 +61,7 @@ return [
             'host' => $host,
             'port' => env('DB_PORT', '3306'),
             'database' => $database,
-            'username' => $database,
+            'username' => $username,
             'password' => $password,
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
