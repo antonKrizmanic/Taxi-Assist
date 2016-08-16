@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+Use Log;
 use App\Http\Requests;
 use App\User;
 use App\Company;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,7 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::oldest('created_at')->get();
+        $users=User::all();
+        Log::info('Prikaz svih korisnika. Prikazuje se korisniku: '.Auth::user()['name']);
         return view('user.index',compact('users'));
     }
 
@@ -34,6 +36,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user=User::find($id);
+        Log::info('Prikaz korisnika s id:'.$id);
         $orders=$user->orders;
 
         for($i=0;$i<count($orders);$i++){

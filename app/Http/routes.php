@@ -11,13 +11,9 @@
 |
 */
 
-
-
-
 Route::auth();
 
 Route::get('/', 'HomeController@index');
-
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
