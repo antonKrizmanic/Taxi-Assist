@@ -103,42 +103,43 @@ function route(origin_place_id, destination_place_id, travel_mode,
 }
 
 /*Na promjenu pocetne ili zavrsne, imaju klasu geocomplete, izracunava udaljenost i poziva funkciju za iscrtavanje puta*/
-$(".geocomplete").change(function(){
+$(".geocomplete").change(function() {
 
-    var pocetna=$("#pocetna").val();
-    var odredisna=$("#odredisna").val();
-
-    var service = new google.maps.DistanceMatrixService;
-    service.getDistanceMatrix({
-        origins: [pocetna],
-        destinations: [odredisna],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC,
-        avoidHighways: false,
-        avoidTolls: false
-    }, function(response, status) {
-        if (status !== google.maps.DistanceMatrixStatus.OK) {
-            alert('Error was:');
-        }
-        else {
-            if(marker !=null){
-                deleteMarkers();
+    var pocetna = $("#pocetna").val();
+    var odredisna = $("#odredisna").val();
+    if(pocetna != "" && odredisna !=""){
+        var service = new google.maps.DistanceMatrixService;
+        service.getDistanceMatrix({
+            origins: [pocetna],
+            destinations: [odredisna],
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false
+        }, function (response, status) {
+            if (status !== google.maps.DistanceMatrixStatus.OK) {
+                alert('Error was:');
             }
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            var output = document.getElementById('output');
-            output.innerHTML = '';
-            $("#udaljenost").css("display","inline");
-            for (var i = 0; i < originList.length; i++) {
-                var results = response.rows[i].elements;
-                for (var j = 0; j < results.length; j++) {
-                    output.innerHTML += results[j].distance.text;
-                    distance = results[j].distance.value;
-                    //output.innerHTML+= " "+ results[j].duration.text;
+            else {
+                if (marker != null) {
+                    deleteMarkers();
+                }
+                var originList = response.originAddresses;
+                var destinationList = response.destinationAddresses;
+                var output = document.getElementById('output');
+                output.innerHTML = '';
+                $("#udaljenost").css("display", "inline");
+                for (var i = 0; i < originList.length; i++) {
+                    var results = response.rows[i].elements;
+                    for (var j = 0; j < results.length; j++) {
+                        output.innerHTML += results[j].distance.text;
+                        distance = results[j].distance.value;
+                        //output.innerHTML+= " "+ results[j].duration.text;
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 });
 /*Dodavanje markera*/
 function addMarker(location, map) {
@@ -152,25 +153,6 @@ function addMarker(location, map) {
 function deleteMarkers() {
     marker.setMap(null);
     marker = null;
-}
-
-/*Dohvaca cijene sa servera*/
-function getPrice() {
-    distance = distance / 1000;
-    distance = distance.toFixed(2);
-    $.ajax({
-        type: 'GET',
-        url: "{{ url('order/getPrice') }}/" + distance,
-        success: function (data) {
-            var cijene = data;
-            document.getElementById("cjene").innerHTML = "<p><b>Cijena</b></p>";
-            for (i = 0; i < cijene.length; i++) {
-                document.getElementById("cjene").innerHTML += "<p>" + cijene[i].name + " " + cijene[i].price + " kn</p>";
-            }
-            $('#cijene').show();
-            $('.saznaj-cijenu').hide();
-        }
-    });
 }
 
 function getAlert() {

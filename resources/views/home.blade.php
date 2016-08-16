@@ -52,7 +52,25 @@
 
 @section('footer')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2IlrXHus1WDRwmSIbwDKY3ByC9TBtcQ4&signed_in=true&v=3.exp&libraries=places&sensor=true" ></script>
-    <script type="text/javascript" src="{!! asset('js/app.js',true) !!}"></script>
-
+    <script type="text/javascript" src="{!! secure_asset('js/app.js') !!}"></script>
+    <script type="text/javascript">
+        function getPrice() {
+            distance = distance / 1000;
+            distance = distance.toFixed(2);
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('order/getPrice') }}/" + distance,
+                success: function (data) {
+                    var cijene = data;
+                    document.getElementById("cjene").innerHTML = "<p><b>Cijena</b></p>";
+                    for (i = 0; i < cijene.length; i++) {
+                        document.getElementById("cjene").innerHTML += "<p>" + cijene[i].name + " " + cijene[i].price + " kn</p>";
+                    }
+                    $('#cijene').show();
+                    $('.saznaj-cijenu').hide();
+                }
+            });
+        }
+    </script>
 
 @endsection

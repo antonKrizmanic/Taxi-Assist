@@ -23,5 +23,5 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 });
 
 Route::post('order','OrderController@store');
-Route::get('order/getPrice/{distance}','OrderController@getPrice');
+Route::get('order/getPrice/{distance}','OrderController@getPrice')->name('getPrice');
 Route::get('reservations','HomeController@getOrders');
