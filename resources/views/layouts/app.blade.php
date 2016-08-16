@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link href="{!! asset('css/libs/bootstrap.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{!! asset('css/stil.css') !!}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{!! HTML::style('css/libs/bootstrap.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{!! HTML::style('css/stil.css') !!}" media="all" rel="stylesheet" type="text/css" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
