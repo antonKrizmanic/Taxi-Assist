@@ -66,7 +66,7 @@ return [
             //'username' => env('DB_USERNAME','root'),
             //'password' => env('DB_PASSWORD','secret'),
             'username' => $username,
-            'password' => $database,
+            'password' => $password,
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
