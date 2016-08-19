@@ -59,6 +59,7 @@ function enableAutocomplete(){
         expandViewportToFitPlace(map, place);
         origin_place_id = place.place_id;
         route(origin_place_id, destination_place_id);
+        addMarker(place,map);
         getDistance();
     });
     destination_autocomplete.addListener('place_changed', function() {
