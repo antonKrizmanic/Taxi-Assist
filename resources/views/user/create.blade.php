@@ -17,6 +17,10 @@
                 {!! Form::email('email',null,array('class'=>'form-control')) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('phone', 'Phone') !!}
+                {!! Form::text('phone',null,array('class'=>'form-control')) !!}
+            </div>
+            <div class="form-group">
                 {!! Form::label('password', 'Password:') !!}
                 {!! Form::password('password',array('class'=>'form-control')) !!}
             </div>

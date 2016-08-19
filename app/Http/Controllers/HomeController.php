@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+
     }
 
     /**
@@ -30,14 +30,5 @@ class HomeController extends Controller
         $taxi= Company::pluck('name','id');
         return view('home',compact('taxi'));
     }
-    public function getOrders()
-    {
-        $user = User::find(Auth::user()->id);
-        $orders = $user->orders;
-        for($i=0;$i<count($orders);$i++){
-            $orders[$i]['taxiCompany']=Company::find($orders[$i]->company_id)->name;
-        }
-
-        return view('reservations',compact('orders'));
-    }
+    
 }

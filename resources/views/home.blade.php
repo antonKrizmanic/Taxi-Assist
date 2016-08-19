@@ -6,12 +6,12 @@
             <div class="col-md-6">
                 {{ Form::open(array('url'=>'order')) }}
                 <div class="form-group">
-                    {{ Form::label('startAddress','Pocetna adresa') }}
-                    {{ Form::text('startAddress',null,array('class'=>'form-control geocomplete','id'=>'pocetna','placeholder'=>'Pocetna adresa')) }}
+                    {{ Form::label('startAddress','Početna adresa') }}
+                    {{ Form::text('startAddress',null,array('class'=>'form-control geocomplete','id'=>'pocetna','placeholder'=>'Početna adresa')) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('endAddress','Zavrsna adresa') }}
-                    {{ Form::text('endAddress',null,array('class'=>'form-control geocomplete','id'=>'odredisna','placeholder'=>'Odredisna adresa')) }}
+                    {{ Form::label('endAddress','Odredišna adresa') }}
+                    {{ Form::text('endAddress',null,array('class'=>'form-control geocomplete','id'=>'odredisna','placeholder'=>'Završna adresa')) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('description','Napomena') }}
@@ -21,19 +21,19 @@
                     <label for="udaljenost" id="udaljenost">Udaljenost:</label>
                     <p id="output"></p>
                 </div>
-                <div id="cijene">
-                    <div id="cjene">
+                <div id="odabir">
+                    <div id="cijene">
 
                     </div>
                     <div class="form-group">
-                        {{ Form::label('company_id','Odaberite taxi sluzbu koju zelite naruciti:') }}
+                        {{ Form::label('company_id','Odaberite taxi službu koju želite naručiti:') }}
                         {{ Form::select('company_id', $taxi,null,array('class'=>'form-control')) }}
                     </div>
                     <div class="form-group">
                         @if(Auth::guest())
                             <a href="#" class="btn btn-primary disabled">Naruci</a>
                         @else
-                            {{ Form::submit('Naruci',array('class'=>'btn btn-primary','onclick'=>'getAlert();')) }}
+                            {{ Form::submit('Naruči',array('class'=>'btn btn-primary')) }}
                         @endif
                     </div>
                 </div>
@@ -55,18 +55,15 @@
     <script type="text/javascript" src="{!! secure_asset('js/app.js') !!}"></script>
     <script type="text/javascript">
         function getPrice() {
-            distance = distance / 1000;
-            distance = distance.toFixed(2);
             $.ajax({
                 type: 'GET',
-                url: "{{ url('order/getPrice') }}/" + distance,
-                success: function (data) {
-                    var cijene = data;
-                    document.getElementById("cjene").innerHTML = "<p><b>Cijena</b></p>";
+                url: "{{ route('getPrice') }}",
+                success: function (cijene) {
+                    $("#cijene").html('<p><b>Cijene:</b></p>');
                     for (i = 0; i < cijene.length; i++) {
-                        document.getElementById("cjene").innerHTML += "<p>" + cijene[i].name + " " + cijene[i].price + " kn</p>";
+                        $("#cijene").append("<p>" + cijene[i].name + " " + cijene[i].price + " kn</p>");
                     }
-                    $('#cijene').show();
+                    $('#odabir').show();
                     $('.saznaj-cijenu').hide();
                 }
             });

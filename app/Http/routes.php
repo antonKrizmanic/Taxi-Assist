@@ -15,13 +15,15 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('order/getPrice','OrderController@getPrice')->name('getPrice');
+
+Route::get('user/reservations','UserController@getOrders');
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
     Route::resource('taxi','TaxiController');
     Route::resource('user','UserController');
     Route::resource('order','OrderController');
 });
-
 Route::post('order','OrderController@store');
-Route::get('order/getPrice/{distance}','OrderController@getPrice')->name('getPrice');
-Route::get('reservations','HomeController@getOrders');
+
+

@@ -9,9 +9,9 @@
             <tr>
                 <th>Pocetna adresa</th>
                 <th>Odredisna adresa</th>
-                <th>Taxi prijevoznik</th>
                 <th>Udaljenost</th>
                 <th>Cijena</th>
+                <th>Taxi prijevoznik</th>
                 <th>Datum</th>
             </tr>
             </thead>
@@ -20,8 +20,8 @@
                     <tr>
                         <td>{{ $order->startAddress }}</td>
                         <td>{{ $order->endAddress }}</td>
-                        <td>{{ $order->distance }}</td>
-                        <td>{{ $order->price }}</td>
+                        <td>{{ $order->distance }} km</td>
+                        <td>{{ $order->price }} kn</td>
                         <td>{{ $order->taxiCompany}}</td>
                         <td>{{ $order->created_at }}</td>
                     </tr>

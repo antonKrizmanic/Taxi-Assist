@@ -1,20 +1,20 @@
 var map;
 var marker;
-var distance;
 /*Omogucava autocomplite i sakriva polje sa cijenama
  * iscrtava kartu i pokusava locirati korisnika*/
 $( document ).ready(function() {
-    $('#cijene').hide();
-    
-    var origin_place_id = null;
-    var destination_place_id = null;
-    var travel_mode = google.maps.TravelMode.DRIVING;
-    var map = new google.maps.Map(document.getElementById('map'), {
+    $('#odabir').hide();
+
+    map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
         center: {lat: 45.81, lng: 16},
         zoom: 13
     });
-    // If the browser supports the Geolocation API
+    getLocation();
+    enableAutocomplete();
+
+});
+function getLocation(){
     if (typeof navigator.geolocation == "undefined") {
         $("#error").text("Your browser doesn't support the Geolocation API");
         return;
@@ -38,20 +38,18 @@ $( document ).ready(function() {
                 });
         });
     }
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-    directionsDisplay.setMap(map);
+}
+function enableAutocomplete(){
 
     var origin_input = document.getElementById('pocetna');
     var destination_input = document.getElementById('odredisna');
-
     var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
     origin_autocomplete.bindTo('bounds', map);
     var destination_autocomplete = new google.maps.places.Autocomplete(destination_input);
     destination_autocomplete.bindTo('bounds', map);
 
-
-
+    var origin_place_id = null;
+    var destination_place_id = null;
     origin_autocomplete.addListener('place_changed', function() {
         var place = origin_autocomplete.getPlace();
         if (!place.geometry) {
@@ -60,10 +58,9 @@ $( document ).ready(function() {
         }
         expandViewportToFitPlace(map, place);
         origin_place_id = place.place_id;
-        route(origin_place_id, destination_place_id, travel_mode,
-            directionsService, directionsDisplay);
+        route(origin_place_id, destination_place_id);
+        getDistance();
     });
-
     destination_autocomplete.addListener('place_changed', function() {
         var place = destination_autocomplete.getPlace();
         if (!place.geometry) {
@@ -72,10 +69,11 @@ $( document ).ready(function() {
         }
         expandViewportToFitPlace(map, place);
         destination_place_id = place.place_id;
-        route(origin_place_id, destination_place_id, travel_mode,
-            directionsService, directionsDisplay);
+        route(origin_place_id, destination_place_id);
+        getDistance(origin_input.value,destination_input.value);
     });
-});
+}
+
 function expandViewportToFitPlace(map, place) {
     if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
@@ -84,8 +82,12 @@ function expandViewportToFitPlace(map, place) {
         map.setZoom(17);
     }
 }
-function route(origin_place_id, destination_place_id, travel_mode,
-               directionsService, directionsDisplay) {
+function route(origin_place_id, destination_place_id) {
+    var travel_mode = google.maps.TravelMode.DRIVING;
+
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(map);
     if (!origin_place_id || !destination_place_id) {
         return;
     }
@@ -102,16 +104,13 @@ function route(origin_place_id, destination_place_id, travel_mode,
     });
 }
 
-/*Na promjenu pocetne ili zavrsne, imaju klasu geocomplete, izracunava udaljenost i poziva funkciju za iscrtavanje puta*/
-$(".geocomplete").change(function() {
+function getDistance(origin_input,destination_input) {
 
-    var pocetna = $("#pocetna").val();
-    var odredisna = $("#odredisna").val();
     if(pocetna != "" && odredisna !=""){
         var service = new google.maps.DistanceMatrixService;
         service.getDistanceMatrix({
-            origins: [pocetna],
-            destinations: [odredisna],
+            origins: [origin_input],
+            destinations: [destination_input],
             travelMode: google.maps.TravelMode.DRIVING,
             unitSystem: google.maps.UnitSystem.METRIC,
             avoidHighways: false,
@@ -133,14 +132,16 @@ $(".geocomplete").change(function() {
                     var results = response.rows[i].elements;
                     for (var j = 0; j < results.length; j++) {
                         output.innerHTML += results[j].distance.text;
-                        distance = results[j].distance.value;
-                        //output.innerHTML+= " "+ results[j].duration.text;
+                        distance = results[j].distance.text;
+                        distanceLeng = distance.length - 3;
+                        distance = distance.substring(0, distanceLeng);
+                        document.cookie = "distance=" + distance;
                     }
                 }
             }
         });
     }
-});
+}
 /*Dodavanje markera*/
 function addMarker(location, map) {
     marker = new google.maps.Marker({
@@ -155,9 +156,3 @@ function deleteMarkers() {
     marker = null;
 }
 
-function getAlert() {
-    var distanceLeng = $("#output").text().length - 3;
-    var distance = $("#output").text();
-    var dist = distance.substring(0, distanceLeng);
-    document.cookie = "distance=" + dist;
-}

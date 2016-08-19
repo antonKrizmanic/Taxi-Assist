@@ -15,10 +15,10 @@ class CreateTableCompanies extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->decimal('startPrice');
-            $table->decimal('freeKm');
-            $table->decimal('kmPrice');
-            $table->decimal('waitingPrice');
+            $table->decimal('startPrice',5,2);
+            $table->decimal('freeKm',5,2);
+            $table->decimal('kmPrice',5,2);
+            $table->decimal('waitingPrice',5,2);
             $table->timestamps();
 
         });

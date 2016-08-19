@@ -50,17 +50,30 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request){
 
-        $distance=$_COOKIE['distance'];
+
         $order=$request->all();
-        $order['distance']=$distance;
-        $price=$this->getPriceCompany($distance,$order['company_id']);
-        $order['price']=$price;
+        $order['distance']=$_COOKIE['distance'];;
+        $order['price']=$this->getPriceCompany($order['distance'],$order['company_id']);
         Auth::user()->orders()->create($order);
         \Session::flash('flash_message','Uspješno ste naručili taxi');
-
         return redirect('/');
     }
 
+
+
+    /**
+     * Racuna cijenu za odredenu udaljenost za sve taxi sluzbe
+     * @param $distance
+     * @return json
+     */
+    public function getPrice(){
+        $companies=Company::all();
+        $distance=$_COOKIE['distance'];
+        for($i=0;$i<count($companies);$i++){
+            $companies[$i]['price']=$this->getPriceCompany($distance,$companies[$i]['id']);
+        }
+        return $companies;
+    }
     /**
      * Racuna cijenu za odredenu udaljenost i odredenu taxi sluzbu
      * @param $distance
@@ -77,27 +90,6 @@ class OrderController extends Controller
             $price=$company->startPrice+$company->kmPrice*$distanceToPay;
         }
         return $price;
-    }
-
-    /**
-     * Racuna cijenu za odredenu udaljenost za sve taxi sluzbe
-     * @param $distance
-     * @return json
-     */
-    public function getPrice($distance){
-        $companies=Company::all();
-
-        for($i=0;$i<count($companies);$i++){
-            if($distance<$companies[$i]->freeKm){
-                $companies[$i]['price']=$companies[$i]->startPrice;
-            }
-            else{
-                $distanceToPay=$distance-$companies[$i]->freeKm;
-                $companies[$i]['price']=$companies[$i]->startPrice+$companies[$i]->kmPrice*$distanceToPay;
-            }
-
-        }
-        return $companies;
     }
 
     /**

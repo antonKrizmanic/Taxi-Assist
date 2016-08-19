@@ -95,4 +95,14 @@ class UserController extends Controller
         User::destroy($id);
         return redirect('user');
     }
+    public function getOrders()
+    {
+        $user = User::find(Auth::user()->id);
+        $orders = $user->orders;
+        for($i=0;$i<count($orders);$i++){
+            $orders[$i]['taxiCompany']=Company::find($orders[$i]->company_id)->name;
+        }
+
+        return view('reservations',compact('orders'));
+    }
 }
