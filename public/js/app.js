@@ -78,9 +78,10 @@ function enableAutocomplete(){
 function expandViewportToFitPlace(map, place) {
     if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
+        addMarker(place.geometry.location,map);
     } else {
         map.setCenter(place.geometry.location);
-        addMarker(place.geometry,map);
+        addMarker(place.geometry.location,map);
         map.setZoom(17);
     }
 }
