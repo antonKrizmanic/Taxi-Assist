@@ -101,6 +101,7 @@ function route(origin_place_id, destination_place_id) {
     }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            deleteMarkers();
         } else {
             window.alert('Directions request failed due to ' + status);
         }
