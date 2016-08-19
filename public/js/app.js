@@ -59,7 +59,6 @@ function enableAutocomplete(){
         expandViewportToFitPlace(map, place);
         origin_place_id = place.place_id;
         route(origin_place_id, destination_place_id);
-
         getDistance();
     });
     destination_autocomplete.addListener('place_changed', function() {
@@ -78,10 +77,8 @@ function enableAutocomplete(){
 function expandViewportToFitPlace(map, place) {
     if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
-        addMarker(place.geometry.location,map);
     } else {
         map.setCenter(place.geometry.location);
-        addMarker(place.geometry.location,map);
         map.setZoom(17);
     }
 }
@@ -101,7 +98,6 @@ function route(origin_place_id, destination_place_id) {
     }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
-            deleteMarkers();
         } else {
             window.alert('Directions request failed due to ' + status);
         }
