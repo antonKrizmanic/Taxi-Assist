@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link href="{!! secure_asset('css/libs/bootstrap.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{!! secure_asset('css/stil.css') !!}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{!! asset('css/libs/bootstrap.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{!! asset('css/stil.css') !!}" media="all" rel="stylesheet" type="text/css" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -91,8 +91,8 @@
     </div>
 
     <!-- JavaScripts -->
-    <script type="text/javascript" src="{!! secure_asset('js/libs/jquery.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! secure_asset('js/libs/bootstrap.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/libs/jquery.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/libs/bootstrap.min.js') !!}"></script>
     @yield('footer')
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
