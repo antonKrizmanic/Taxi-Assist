@@ -12,6 +12,7 @@
                     <th>Rb</th>
                     <th>Ime</th>
                     <th>E-mail</th>
+                    <th>Telefon</th>
                     <th>Registriran</th>
                     <th>Akcija</th>
                 </tr>
@@ -23,18 +24,22 @@
                         <td><a href="{{ url('user/'.$user->id) }}">{{ $index }}</a></td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->phone }}</td>
                         <td>{{ $user->created_at }}</td>
-                        {{ Form::open(['method'=>'DELETE','route'=>['user.destroy',$user->id]]) }}
+                        {{ Form::open(['method'=>'DELETE','route'=>['user.destroy',$user->id],'onsubmit'=>'return ConfirmDelete()']) }}
                         <td><a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-default">Uredi</a>
-                            {{ Form::submit('Delete',['class'=>'btn btn-danger']) }}</td>
+                            {{ Form::submit('Obriši',['class'=>'btn btn-danger']) }}</td>
                         {{ Form::close() }}
                     </tr>
                     {{--*/ $index ++ /*--}}
                 @endforeach
+            <a href="#" class="deleteGroup" onclick="return ConfirmDelete()">Klikni me</a>
 
             </tbody>
         </table>
+        <script>
 
+        </script>
 
 
 

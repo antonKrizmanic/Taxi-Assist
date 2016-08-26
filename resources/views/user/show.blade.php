@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Narudzbe korisnika: {{ $user->name }}</h2>
+    <h2>Narudžbe korisnika: {{ $user->name }}</h2>
 
     <table class="table table-responsive table-striped">
         <thead>
             <tr>
                 <th>Rb</th>
-                <th>Taxi sluzba</th>
-                <th>Pocetna adresa</th>
-                <th>Zavrsna adresa</th>
+                <th>Taxi služba</th>
+                <th>Početna adresa</th>
+                <th>Završna adresa</th>
                 <th>Udaljenost</th>
                 <th>Cijena</th>
             </tr>

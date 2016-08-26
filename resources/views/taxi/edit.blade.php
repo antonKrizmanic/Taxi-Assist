@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <h2>Uredivanje taxi sluzbe: {{ $taxi->name }}</h2>
+        <h2>Uređivanje taxi službe: {{ $taxi->name }}</h2>
         <hr>
         <div class="row">
             <div class="col-md-6">

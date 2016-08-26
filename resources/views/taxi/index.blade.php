@@ -10,11 +10,11 @@
             <thead>
                 <tr>
                     <th>Rb</th>
-                    <th>Naziv taxi sluzbe</th>
+                    <th>Naziv taxi službe</th>
                     <th>Cijena starta</th>
-                    <th>Kilometri ukljuceni u start</th>
+                    <th>Kilometri uključeni u start</th>
                     <th>Cijena po km</th>
-                    <th>Cijena cekanja /h</th>
+                    <th>Cijena čekanja /h</th>
                     <th>Akcija</th>
                 </tr>
             </thead>
@@ -28,9 +28,9 @@
                     <td> {{ $taxi->freeKm }} km </td>
                     <td> {{ $taxi->kmPrice }} kn </td>
                     <td> {{ $taxi->waitingPrice }} kn </td>
-                    {{ Form::open(['method'=>'DELETE','route'=>['taxi.destroy',$taxi->id]]) }}
+                    {{ Form::open(['method'=>'DELETE','route'=>['taxi.destroy',$taxi->id],'onsubmit' => 'return ConfirmDelete()']) }}
                         <td><a href="{{ url('taxi/'.$taxi->id.'/edit') }}" class="btn btn-default">Uredi</a>
-                            {{ Form::submit('Delete',['class'=>'btn btn-danger']) }}                        </td>
+                            {{ Form::submit('Obriši',['class'=>'btn btn-danger']) }}                        </td>
                     {{ Form::close() }}
                 </tr>
                 {{--*/ $index ++ /*--}}

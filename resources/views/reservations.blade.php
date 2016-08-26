@@ -3,12 +3,12 @@
 @section('content')
 
     <div class="container">
-        <h2>Moje rezervacije</h2>
+        <h2>Moje narudžbe</h2>
         <table class="table table-responsive">
             <thead>
             <tr>
-                <th>Pocetna adresa</th>
-                <th>Odredisna adresa</th>
+                <th>Početna adresa</th>
+                <th>Odredišna adresa</th>
                 <th>Udaljenost</th>
                 <th>Cijena</th>
                 <th>Taxi prijevoznik</th>

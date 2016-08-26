@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use Log;
+use App\Http\Requests\UserRequest;
 use App\Http\Requests;
 use App\User;
 use App\Company;
@@ -57,7 +58,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request){
+    public function store(UserRequest $request){
 
         $user= $request->all();
         $user['password']=bcrypt($user['password']);
@@ -80,7 +81,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, Request $request){
+    public function update($id, UserRequest $request){
         $user=User::findOrFail($id);
         $user->update($request->all());
         return redirect('user');

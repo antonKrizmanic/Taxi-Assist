@@ -33,7 +33,13 @@ class OrderController extends Controller
 
         return view('order.index',compact('orders'));
     }
+    public function show($id){
+        $order=Order::find($id);
+        $order['user']=User::find($order->user_id)->name;
+        $order['taxi']=Company::find($order->company_id)->name;
 
+        return view('order.show',compact('order'));
+    }
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

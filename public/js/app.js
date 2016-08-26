@@ -59,7 +59,9 @@ function enableAutocomplete(){
         expandViewportToFitPlace(map, place);
         origin_place_id = place.place_id;
         route(origin_place_id, destination_place_id);
-        getDistance();
+        getDistance(origin_input.value,destination_input.value);
+        $('#odabir').hide();
+        $('.saznaj-cijenu').show();
     });
     destination_autocomplete.addListener('place_changed', function() {
         var place = destination_autocomplete.getPlace();
@@ -71,6 +73,8 @@ function enableAutocomplete(){
         destination_place_id = place.place_id;
         route(origin_place_id, destination_place_id);
         getDistance(origin_input.value,destination_input.value);
+        $('#odabir').hide();
+        $('.saznaj-cijenu').show();
     });
 }
 
@@ -155,4 +159,11 @@ function deleteMarkers() {
     marker.setMap(null);
     marker = null;
 }
-
+function ConfirmDelete()
+{
+    var x = confirm("Jeste li sigurni da želite obrisati ovu stavku?");
+    if (x)
+        return true;
+    else
+        return false;
+}

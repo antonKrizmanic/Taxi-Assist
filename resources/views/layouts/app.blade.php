@@ -93,6 +93,7 @@
     <!-- JavaScripts -->
     <script type="text/javascript" src="{!! secure_asset('js/libs/jquery.min.js') !!}"></script>
     <script type="text/javascript" src="{!! secure_asset('js/libs/bootstrap.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! secure_asset('js/app.js') !!}"></script>
     @yield('footer')
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

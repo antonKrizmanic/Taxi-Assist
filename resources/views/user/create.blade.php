@@ -17,12 +17,16 @@
                 {!! Form::email('email',null,array('class'=>'form-control')) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('phone', 'Phone') !!}
+                {!! Form::label('phone', 'Telefonski broj') !!}
                 {!! Form::text('phone',null,array('class'=>'form-control')) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('password', 'Password:') !!}
+                {!! Form::label('password', 'Lozinka:') !!}
                 {!! Form::password('password',array('class'=>'form-control')) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('password_confirmation', 'Potvrda lozinke:') !!}
+                {!! Form::password('password_confirmation',array('class'=>'form-control')) !!}
             </div>
             <div class="form-group">
 

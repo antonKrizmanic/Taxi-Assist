@@ -3,7 +3,7 @@
 @section('content')
 
 
-        <h2>Dodavanje taxi sluzbe</h2>
+        <h2>Dodavanje taxi službe</h2>
         <hr>
         <div class="row">
             <div class="col-md-6">
