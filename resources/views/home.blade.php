@@ -10,6 +10,9 @@
                     {{ Form::text('startAddress',null,array('class'=>'form-control geocomplete','id'=>'pocetna','placeholder'=>'Početna adresa')) }}
                 </div>
                 <div class="form-group">
+                    <a href="javascript:void(0);" onclick="getLocation()">Lociraj me</a>
+                </div>
+                <div class="form-group">
                     {{ Form::label('endAddress','Odredišna adresa') }}
                     {{ Form::text('endAddress',null,array('class'=>'form-control geocomplete','id'=>'odredisna','placeholder'=>'Završna adresa')) }}
                 </div>
