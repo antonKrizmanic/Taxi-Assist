@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>Narudzbe</h2>
+    <h2>Narudžbe</h2>
     <hr>
     <a href="{{ url('order/create') }}" class="btn btn-primary">Dodaj</a>
     {{--*/ $index = 1 /*--}}
