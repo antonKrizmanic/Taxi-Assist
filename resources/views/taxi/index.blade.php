@@ -3,7 +3,7 @@
 @section('content')
 
 
-        <h2>Taxi sluzbe</h2>
+        <h2>Taxi službe</h2>
         <hr>
         <a href="{{ url('taxi/create') }}" class="btn btn-primary">Dodaj</a>
         <table class="table table-responsive table-striped">

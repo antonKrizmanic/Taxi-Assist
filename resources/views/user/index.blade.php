@@ -33,8 +33,6 @@
                     </tr>
                     {{--*/ $index ++ /*--}}
                 @endforeach
-            <a href="#" class="deleteGroup" onclick="return ConfirmDelete()">Klikni me</a>
-
             </tbody>
         </table>
         <script>

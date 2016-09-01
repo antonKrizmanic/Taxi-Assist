@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@index');
 Route::get('order/getPrice','OrderController@getPrice')->name('getPrice');
 
 Route::get('user/reservations','UserController@getOrders');
-Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
+Route::group(['middleware' => ['App\Http\Middleware\AdminMiddleware','App\Http\Middleware\SessionTimeout']], function()
 {
     Route::resource('taxi','TaxiController');
     Route::resource('user','UserController');
