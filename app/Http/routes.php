@@ -11,19 +11,22 @@
 |
 */
 
+/*Za registraciju i prijavu*/
 Route::auth();
-
+/*Pocetna stranica*/
 Route::get('/', 'HomeController@index');
-
+/*Dohvat cijene*/
 Route::get('order/getPrice','OrderController@getPrice')->name('getPrice');
-
+/*Rezervacije prijavljenog korisnika*/
 Route::get('user/reservations','UserController@getOrders');
-Route::group(['middleware' => ['App\Http\Middleware\AdminMiddleware','App\Http\Middleware\SessionTimeout']], function()
+/*CRUD operacije za admina*/
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
     Route::resource('taxi','TaxiController');
     Route::resource('user','UserController');
     Route::resource('order','OrderController');
 });
+/*Omogucuje korisniku spremanje narudzbe u bazu podataka*/
 Route::post('order','OrderController@store');
 
 
