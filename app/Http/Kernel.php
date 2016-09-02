@@ -22,7 +22,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\VerifyCsrfToken::class,
 
 
-        'App\Http\Middleware\HttpsProtocol',
+
+        \App\Http\Middleware\HttpsProtocol::class,
     ];
 
     /**
