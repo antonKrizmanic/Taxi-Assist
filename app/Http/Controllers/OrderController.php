@@ -69,7 +69,6 @@ class OrderController extends Controller
 
     /**
      * Racuna cijenu za odredenu udaljenost za sve taxi sluzbe
-     * @param $distance
      * @return json
      */
     public function getPrice(){
