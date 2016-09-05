@@ -2,112 +2,6 @@ var map;
 var marker;
 /*Omogucava autocomplite i sakriva polje sa cijenama
  * iscrtava kartu i pokusava locirati korisnika*/
-/*$( document ).ready(function() {
-    $('#odabir').hide();
-
-    map = new google.maps.Map(document.getElementById('map'), {
-        mapTypeControl: false,
-        center: {lat: 45.81, lng: 16},
-        zoom: 13
-    });
-    getLocation();
-    enableAutocomplete();
-
-});
-function getLocation(){
-    if (typeof navigator.geolocation == "undefined") {
-        $("#error").text("Your browser doesn't support the Geolocation API");
-        return;
-    }
-    else{
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var location = { lat: position.coords.latitude, lng: position.coords.longitude };
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                    "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-                },
-                function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK){
-                        $("#pocetna").val(results[0].formatted_address);
-                        addMarker(location,map);
-                        map.setCenter(location);
-                    }
-                    else{
-                        $("#error").append("Unable to retrieve your address<br />");
-                    }
-                });
-        });
-    }
-}
-function enableAutocomplete(){
-
-    var origin_input = document.getElementById('pocetna');
-    var destination_input = document.getElementById('odredisna');
-    var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
-    origin_autocomplete.bindTo('bounds', map);
-    var destination_autocomplete = new google.maps.places.Autocomplete(destination_input);
-    destination_autocomplete.bindTo('bounds', map);
-
-    var origin_place_id = null;
-    var destination_place_id = null;
-    origin_autocomplete.addListener('place_changed', function() {
-        var place = origin_autocomplete.getPlace();
-        if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-            return;
-        }
-        expandViewportToFitPlace(map, place);
-        origin_place_id = place.place_id;
-        route(origin_place_id, destination_place_id);
-        getDistance(origin_input.value,destination_input.value);
-        $('#odabir').hide();
-        $('.saznaj-cijenu').show();
-    });
-    destination_autocomplete.addListener('place_changed', function() {
-        var place = destination_autocomplete.getPlace();
-        if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-            return;
-        }
-        expandViewportToFitPlace(map, place);
-        destination_place_id = place.place_id;
-        route(origin_place_id, destination_place_id);
-        getDistance(origin_input.value,destination_input.value);
-        $('#odabir').hide();
-        $('.saznaj-cijenu').show();
-    });
-}
-
-function expandViewportToFitPlace(map, place) {
-    if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-    } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
-    }
-}
-function route(origin_place_id, destination_place_id) {
-    var travel_mode = google.maps.TravelMode.DRIVING;
-
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-    directionsDisplay.setMap(map);
-    if (!origin_place_id || !destination_place_id) {
-        return;
-    }
-    directionsService.route({
-        origin: {'placeId': origin_place_id},
-        destination: {'placeId': destination_place_id},
-        travelMode: travel_mode
-    }, function(response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-        } else {
-            window.alert('Directions request failed due to ' + status);
-        }
-    });
-}
-*/
 $( document ).ready(function() {
     $('#odabir').hide();
 
@@ -118,7 +12,6 @@ $( document ).ready(function() {
     });
     getLocation();
     enableAutocomplete();
-
 });
 function getLocation(){
     if (typeof navigator.geolocation == "undefined") {
