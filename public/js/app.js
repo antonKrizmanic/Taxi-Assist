@@ -155,19 +155,12 @@ function enableAutocomplete(){
 
     var origin_input = document.getElementById('pocetna');
     var destination_input = document.getElementById('odredisna');
-    //var modes = document.getElementById('mode-selector');
-
-
 
     var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
     origin_autocomplete.bindTo('bounds', map);
     var destination_autocomplete =
         new google.maps.places.Autocomplete(destination_input);
     destination_autocomplete.bindTo('bounds', map);
-
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-
 
     function expandViewportToFitPlace(map, place) {
         if (place.geometry.viewport) {
@@ -185,9 +178,6 @@ function enableAutocomplete(){
             return;
         }
         expandViewportToFitPlace(map, place);
-
-        // If the place has a geometry, store its place ID and route if we have
-        // the other place ID
         origin_place_id = place.place_id;
         route(origin_place_id, destination_place_id, travel_mode,
             directionsService, directionsDisplay);
@@ -202,9 +192,6 @@ function enableAutocomplete(){
             return;
         }
         expandViewportToFitPlace(map, place);
-
-        // If the place has a geometry, store its place ID and route if we have
-        // the other place ID
         destination_place_id = place.place_id;
         route(origin_place_id, destination_place_id, travel_mode,
             directionsService, directionsDisplay);

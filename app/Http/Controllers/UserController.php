@@ -12,23 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    //
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Vraca listu korisnika
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        $users=User::all();
-        Log::info('Prikaz svih korisnika. Prikazuje se korisniku: '.Auth::user()['name']);
-        return view('user.index',compact('users'));
-    }
-
     /**
      * Vraca korisnika i njegove narudzbe
      * @param $id
@@ -45,6 +28,23 @@ class UserController extends Controller
         }
 
         return view('user.show',compact(['user','orders']));
+    }
+    //
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Vraca listu korisnika
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $users=User::all();
+        Log::info('Prikaz svih korisnika. Prikazuje se korisniku: '.Auth::user()['name']);
+        return view('user.index',compact('users'));
     }
 
     /**
